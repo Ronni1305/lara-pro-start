@@ -3,9 +3,10 @@
   "short_name": "LARA PRO",
   "description": "LARA PRO – Werkzeuge für die lokale Lawinenbeurteilung",
   "lang": "de",
+  "id": "./",
   "start_url": "./?start=1",
   "scope": "./",
-  "display": "browser",
+  "display": "standalone",
   "background_color": "#0b3d56",
   "theme_color": "#0b3d56",
   "icons": [

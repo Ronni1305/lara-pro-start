@@ -20,7 +20,11 @@
     var eingerichtet = false;
     try { eingerichtet = localStorage.getItem(MERKER) === "ja"; } catch (e) {}
     // Vom Startbildschirm-Symbol aus (Android: ?start=1, iOS: nach dem Einrichten) direkt zu LARA.
-    if (!p.has("anleitung") && (p.has("start") || eingerichtet)) { location.replace(LARA); }
+    // Als installierte App gestartet (Android) bzw. vom Home-Bildschirm (iOS): ebenfalls direkt zu LARA.
+    var alsApp = (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+    if (!p.has("anleitung") && (p.has("start") || eingerichtet || alsApp)) { location.replace(LARA); }
+    // Für die Installation als App verlangt Chrome einen Service Worker.
+    if ("serviceWorker" in navigator) { navigator.serviceWorker.register("sw.js").catch(function () {}); }
     function oeffnen() {
       try { localStorage.setItem(MERKER, "ja"); } catch (e) {}
       location.href = LARA;
@@ -66,7 +70,7 @@
       <p><b>Android (Chrome):</b></p>
       <ol>
         <li>Oben rechts auf <b class="sym">⋮</b> tippen.</li>
-        <li><b>„Zum Startbildschirm hinzufügen“</b> wählen und bestätigen.</li>
+        <li><b>„App installieren“</b> bzw. <b>„Zum Startbildschirm hinzufügen“</b> → <b>„Installieren“</b> wählen.</li>
       </ol>
     </div>
 
