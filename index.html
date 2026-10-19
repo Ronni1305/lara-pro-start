@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LARA PRO</title>
+  <meta name="description" content="LARA PRO – Werkzeuge für die lokale Lawinenbeurteilung">
+  <meta name="theme-color" content="#0b3d56">
+  <!-- iOS: Symbol und Name auf dem Home-Bildschirm -->
+  <meta name="apple-mobile-web-app-title" content="LARA PRO">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <!-- Android: Symbol und Name auf dem Startbildschirm -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="48x48" href="icons/favicon-48.png">
+  <script>
+    // Die eigentliche App (privat bei Streamlit – Anmeldung wie gewohnt).
+    var LARA = "https://lara-prognose.streamlit.app/";
+    var MERKER = "lara-pro-eingerichtet";
+    var p = new URLSearchParams(location.search);
+    var eingerichtet = false;
+    try { eingerichtet = localStorage.getItem(MERKER) === "ja"; } catch (e) {}
+    // Vom Startbildschirm-Symbol aus (Android: ?start=1, iOS: nach dem Einrichten) direkt zu LARA.
+    if (!p.has("anleitung") && (p.has("start") || eingerichtet)) { location.replace(LARA); }
+    function oeffnen() {
+      try { localStorage.setItem(MERKER, "ja"); } catch (e) {}
+      location.href = LARA;
+    }
+  </script>
+  <style>
+    :root { --lara: #0b3d56; --lara2: #176b8f; --hell: #e8f1f6; --text: #1d2b33; --text2: #53636d; --bg: #f3f6f8; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text);
+           font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    header { background: var(--lara); color: #fff; padding: 22px 16px 26px; text-align: center; }
+    header img { width: 112px; height: 112px; border-radius: 24px; box-shadow: 0 4px 16px rgba(0,0,0,.3); }
+    header h1 { margin: 12px 0 2px; font-size: 1.6rem; }
+    header p { margin: 0; opacity: .9; }
+    main { max-width: 560px; margin: 0 auto; padding: 18px 16px 40px; }
+    .karte { background: #fff; border: 1px solid #d8e1e6; border-radius: 14px; padding: 14px 16px; margin: 0 0 14px; }
+    .karte h2 { margin: 0 0 6px; font-size: 1.05rem; color: #173c50; }
+    ol { margin: 6px 0 0; padding-left: 1.3rem; }
+    li { margin: 4px 0; }
+    .knopf { display: block; width: 100%; border: 0; border-radius: 12px; padding: 15px; margin: 6px 0 14px;
+             background: var(--lara2); color: #fff; font-size: 1.05rem; font-weight: 700; cursor: pointer; }
+    .klein { font-size: .85rem; color: var(--text2); }
+    b.sym { background: var(--hell); border-radius: 6px; padding: 0 5px; }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="icons/lara-512.png" alt="LARA-Symbol">
+    <h1>LARA PRO</h1>
+    <p>Werkzeuge für die lokale Lawinenbeurteilung</p>
+  </header>
+  <main>
+    <button class="knopf" onclick="oeffnen()">LARA öffnen</button>
+
+    <div class="karte">
+      <h2>📱 LARA auf den Startbildschirm legen</h2>
+      <p><b>iPhone / iPad (Safari):</b></p>
+      <ol>
+        <li>Unten auf das Teilen-Symbol <b class="sym">⬆︎</b> tippen.</li>
+        <li><b>„Zum Home-Bildschirm“</b> wählen und <b>„Hinzufügen“</b> tippen.</li>
+        <li>Danach hier einmal <b>„LARA öffnen“</b> tippen – ab dann öffnet das Symbol LARA direkt.</li>
+      </ol>
+      <p><b>Android (Chrome):</b></p>
+      <ol>
+        <li>Oben rechts auf <b class="sym">⋮</b> tippen.</li>
+        <li><b>„Zum Startbildschirm hinzufügen“</b> wählen und bestätigen.</li>
+      </ol>
+    </div>
+
+    <div class="karte">
+      <h2>🔐 Anmeldung</h2>
+      <p class="klein">LARA PRO ist eine geschlossene Testversion. Beim ersten Öffnen meldest du dich wie gewohnt
+        mit deiner Einladung bei Streamlit an. Diese Seite enthält nur das Symbol und den Link zu LARA –
+        keine Daten.</p>
+    </div>
+
+    <p class="klein">LARA unterstützt die strukturierte fachliche Beurteilung. Die Ergebnisse sind relative
+      Systemindizes, keine Wahrscheinlichkeiten und keine Sicherheitsfreigabe.</p>
+    <p class="klein"><a href="./?anleitung=1">Diese Anleitung später wieder anzeigen</a></p>
+  </main>
+</body>
+</html>

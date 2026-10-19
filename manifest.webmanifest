@@ -1,0 +1,17 @@
+{
+  "name": "LARA PRO",
+  "short_name": "LARA PRO",
+  "description": "LARA PRO – Werkzeuge für die lokale Lawinenbeurteilung",
+  "lang": "de",
+  "start_url": "./?start=1",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#0b3d56",
+  "theme_color": "#0b3d56",
+  "icons": [
+    {"src": "icons/lara-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "icons/lara-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+    {"src": "icons/lara-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable"},
+    {"src": "icons/lara-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  ]
+}
